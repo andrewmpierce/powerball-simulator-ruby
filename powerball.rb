@@ -1,5 +1,5 @@
 require './ticket'
-
+require 'pry'
 
 def check_intersection(array1, array2)
   intersection = array1[0..5] & array2[0..5]
@@ -9,15 +9,16 @@ end
 
 def check_powerball(array1, array2)
   if array1[-1] == array2[-1]
-    return True
+    return true
   else
-    return False
+    return false
   end
 end
 
 
 def check_winnings(array1, array2)
   intersection = check_intersection(array1, array2)
+  puts "The intersection is #{intersection}"
   powerball = check_powerball(array1, array2)
   if intersection == 5 && powerball
     return 40000000
@@ -41,12 +42,10 @@ def check_winnings(array1, array2)
 end
 
 ticket = Ticket.new
-ticket2 = Ticker.new
+ticket2 = Ticket.new
 
-winnings = check_winnings(ticket, ticket2)
+winnings = check_winnings(ticket.numbers, ticket2.numbers)
 puts winnings
-
-
 
 
 
