@@ -40,20 +40,34 @@ def check_winnings(array1, array2)
   end
 end
 
-def drawing(n, winning_ticket)
+def drawing(n_tickets, winning_ticket)
   drawing_winnings = 0
-  n.times do |x|
+  n_tickets.times do |x|
     ticket = Ticket.new
     drawing_winnings += check_winnings(winning_ticket, ticket.numbers)
-  end 
+  end
   return drawing_winnings
 end
 
-winning_ticket = Ticket.new
-drawing(10, winning_ticket.numbers)
-
-
-
+def trials(n_trials, n_tickets)
+  winning_ticket = Ticket.new
+  total_winnings = 0
+  n_trials.times do |x|
+    total_winnings += drawing(n_tickets, winning_ticket.numbers)
+    puts "This is drawing\# #{x+1}"
+    puts "Your winnings so far are #{total_winnings} dollars!"
+  end
+end
 
 def run_sim
+  puts "Let's play the lottery."
+  puts "How many tickets do you want to buy per drawing?"
+  num_tickets = gets
+  num_tickets = num_tickets.chomp.to_i
+  puts "How many drawings do you want to play for?"
+  num_trials = gets
+  num_trials = num_trials.chomp.to_i
+  trials(num_trials, num_tickets)
 end
+
+run_sim
