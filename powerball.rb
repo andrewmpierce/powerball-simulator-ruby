@@ -18,7 +18,6 @@ end
 
 def check_winnings(array1, array2)
   intersection = check_intersection(array1, array2)
-  puts "The intersection is #{intersection}"
   powerball = check_powerball(array1, array2)
   if intersection == 5 && powerball
     return 40000000
@@ -41,11 +40,18 @@ def check_winnings(array1, array2)
   end
 end
 
-ticket = Ticket.new
-ticket2 = Ticket.new
+def drawing(n, winning_ticket)
+  drawing_winnings = 0
+  n.times do |x|
+    ticket = Ticket.new
+    drawing_winnings += check_winnings(winning_ticket, ticket.numbers)
+  end 
+  return drawing_winnings
+end
 
-winnings = check_winnings(ticket.numbers, ticket2.numbers)
-puts winnings
+winning_ticket = Ticket.new
+drawing(10, winning_ticket.numbers)
+
 
 
 
